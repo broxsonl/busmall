@@ -9,11 +9,13 @@ var lastIndex = [];
 var surveyLength = 0;
 //Event Listener Global
 var picSection = document.getElementById('picSection');
-
 //HTML Element Getters
 var leftImg = document.getElementById('left');
 var centerImg = document.getElementById('center');
 var rightImg = document.getElementById('right');
+
+//HTML Canvas Element Getter
+var canvas = document.getElementById('user-data');
 
 //Constructor for CatalogItem
 function CatalogItem (imageName, filePath) {
@@ -24,6 +26,15 @@ function CatalogItem (imageName, filePath) {
   //Push the object to imageArray
   catalogArray.push(this);
 }
+
+//Chart constructor
+// function chartItem (tallyClicked,)
+//
+// function updateChartArrays() {
+//   for (var i = 0; i < catalogArray.length; i++) {
+//
+//   }
+// }
 
 //CatalogItem Objects
 new CatalogItem ('R2D2 Bag', 'img/bag.jpg');
@@ -63,7 +74,7 @@ function surveyEnd() {
 //Function to Load Images to Page
 function loadImages() {
   if (surveyLength > 24) {
-    surveyend();
+    surveyEnd();
   }
 
   lastIndex = [];
@@ -95,6 +106,7 @@ function loadImages() {
 
 }
 
+//Event Handler
 function handleUserClick(event) {
   event.preventDefault();
 
@@ -119,6 +131,8 @@ function handleUserClick(event) {
   loadImages();
 }
 
+//Calling function at end of page to ensure initial images are loaded
 loadImages();
 
+//Event Listener
 picSection.addEventListener('click', handleUserClick);
