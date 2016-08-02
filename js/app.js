@@ -14,11 +14,9 @@ var leftImg = document.getElementById('left');
 var centerImg = document.getElementById('center');
 var rightImg = document.getElementById('right');
 
-//Create View Results button
-
 //Three Random Math Variables for Accessing Array
 
-//Constructor for CtalogItem
+//Constructor for CatalogItem
 function CatalogItem (imageName, filePath) {
   this.imageName = imageName;
   this.filePath = filePath;
