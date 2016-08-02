@@ -7,11 +7,17 @@ var catalogArray = [];
 //Event Listener Global
 var userClick = document.getElementById('picSection');
 
+//HTML Element Getters
 var leftImg = document.getElementById('left');
 var centerImg = document.getElementById('center');
 var rightImg = document.getElementById('right');
 
-//catalogItem constructor
+//Three Random Math Variables for Accessing Array
+var randomIndex1 = Math.floor(Math.random() * catalogArray.length);
+var randomIndex2 = Math.floor(Math.random() * catalogArray.length);
+var randomIndex3 = Math.floor(Math.random() * catalogArray.length);
+
+//Constructor for CtalogItem
 function CatalogItem (imageName, filePath) {
   this.imageName = imageName;
   this.filePath = filePath;
@@ -21,7 +27,7 @@ function CatalogItem (imageName, filePath) {
   catalogArray.push(this);
 }
 
-//CatalogItems created here
+//CatalogItem Objects created below
 new CatalogItem ('R2D2 Bag', 'img/bag.jpg');
 new CatalogItem ('Banana Slicer', 'img/banana.jpg');
 new CatalogItem ('iPad TP Stand', 'img/bathroom.jpg');
@@ -43,16 +49,10 @@ new CatalogItem ('Tentacle USB', 'img/usb.jpg');
 new CatalogItem ('Watering Can', 'img/water-can.jpg');
 new CatalogItem ('Wine Glass', 'img/wine-glass.jpg');
 
-var randomIndex1 = Math.floor(Math.random() * catalogArray.length);
-var randomIndex2 = Math.floor(Math.random() * catalogArray.length);
-var randomIndex3 = Math.floor(Math.random() * catalogArray.length);
-
+//Function to Load Images to Page
 function loadImages() {
 
-  var randomIndex1 = Math.floor(Math.random() * catalogArray.length);
-  var randomIndex2 = Math.floor(Math.random() * catalogArray.length);
-  var randomIndex3 = Math.floor(Math.random() * catalogArray.length);
-
+  //While loops to prevent duplicates
   while (randomIndex2 === randomIndex1) {
     randomIndex2 = Math.floor(Math.random() * catalogArray.length);
   }
@@ -61,8 +61,11 @@ function loadImages() {
     randomIndex3 = Math.floor(Math.random() * (catalogArray.length));
   }
 
+  //Makes leftImg's src property equal to the fileName of the indexed item
   leftImg.src = catalogArray[randomIndex1].filePath;
+  //Adds 1 to the display tally property of the indexed object
   catalogArray[randomIndex1].tallyDisplayed += 1;
+
   centerImg.src = catalogArray[randomIndex2].filePath;
   catalogArray[randomIndex2].tallyDisplayed += 1;
   rightImg.src = catalogArray[randomIndex3].filePath;
@@ -73,7 +76,7 @@ function loadImages() {
 function handleUserClick(event) {
   event.preventDefault();
 
-  alert('Click is working');
+  // alert('Click is working');
 
   if (event.target.id === 'left') {
     catalogArray[randomIndex1].tallyClicked += 1;
@@ -89,8 +92,13 @@ function handleUserClick(event) {
   else {
     alert('Pick a product!');
   }
+  console.log('I clicked' + event.target.id);
 
-  // console.log(clickedObject)
+  //Re-calculates randomIndex variables
+  randomIndex1 = Math.floor(Math.random() * catalogArray.length);
+  randomIndex2 = Math.floor(Math.random() * catalogArray.length);
+  randomIndex3 = Math.floor(Math.random() * catalogArray.length);
+
   loadImages();
 }
 
