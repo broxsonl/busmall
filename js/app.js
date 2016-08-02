@@ -5,10 +5,17 @@
 var catalogArray = [];
 //Array of prior generated randomIndexes.
 var lastIndex = [];
+//Array of imageName
+var imageNameArray = [];
+var clicksPerObjectArray = [];
+var tallyClickFinal = [];
 //SurveyLength variable to end after 25 clicks
 var surveyLength = 0;
 //Event Listener Global
 var picSection = document.getElementById('picSection');
+//View Results Button
+var viewResultsButton = document.createElement('button');
+viewResultsButton.textContent = 'View Results';
 //HTML Element Getters
 var leftImg = document.getElementById('left');
 var centerImg = document.getElementById('center');
@@ -16,7 +23,6 @@ var rightImg = document.getElementById('right');
 
 //HTML Canvas Element Getter
 var canvas = document.getElementById('user-data');
-
 //Constructor for CatalogItem
 function CatalogItem (imageName, filePath) {
   this.imageName = imageName;
@@ -25,17 +31,45 @@ function CatalogItem (imageName, filePath) {
   this.tallyDisplayed = 0;
   //Push the object to imageArray
   catalogArray.push(this);
+  imageNameArray.push(this.imageName);
+};
+
+var data = {
+  //Labels = imageName from each image object
+  labels: imageNameArray,
+  datasets: [
+    {
+      label: 'Product Chosen',
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 1,
+      data: tallyClickFinal,
+    },
+  ]
+};
+
+// Chart constructor
+function drawChart() {
+  var ctx = canvas.getContext('2d');
+  var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+  });
 }
-
-//Chart constructor
-// function chartItem (tallyClicked,)
-//
-// function updateChartArrays() {
-//   for (var i = 0; i < catalogArray.length; i++) {
-//
-//   }
-// }
-
 //CatalogItem Objects
 new CatalogItem ('R2D2 Bag', 'img/bag.jpg');
 new CatalogItem ('Banana Slicer', 'img/banana.jpg');
@@ -65,11 +99,12 @@ var randomIndex3 = Math.floor(Math.random() * catalogArray.length);
 
 //Function to end survey at 25 choices
 function surveyEnd() {
-  var viewResultsButton = document.createElement('button');
-  viewResultsButton.textContent = 'View Results';
   picSection.appendChild(viewResultsButton);
   picSection.removeEventListener('click', handleUserClick);
-}
+  for (var i = 0; i < catalogArray.length; i++) {
+    tallyClickFinal.push(catalogArray[i].tallyClicked);
+  };
+};
 
 //Function to Load Images to Page
 function loadImages() {
@@ -136,3 +171,4 @@ loadImages();
 
 //Event Listener
 picSection.addEventListener('click', handleUserClick);
+viewResultsButton.addEventListener('click', drawChart);
