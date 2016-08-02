@@ -1,20 +1,19 @@
 'use strict';
+//GLOBAL Variables
 
 //Array of all of our images, pushed to from catalogItem
 var catalogArray = [];
+//Array of prior generated randomIndexes.
 var lastIndex = [];
 //SurveyLength variable to end after 25 clicks
 var surveyLength = 0;
-
 //Event Listener Global
-var userClick = document.getElementById('picSection');
+var picSection = document.getElementById('picSection');
 
 //HTML Element Getters
 var leftImg = document.getElementById('left');
 var centerImg = document.getElementById('center');
 var rightImg = document.getElementById('right');
-
-//Three Random Math Variables for Accessing Array
 
 //Constructor for CatalogItem
 function CatalogItem (imageName, filePath) {
@@ -26,7 +25,7 @@ function CatalogItem (imageName, filePath) {
   catalogArray.push(this);
 }
 
-//CatalogItem Objects created below
+//CatalogItem Objects
 new CatalogItem ('R2D2 Bag', 'img/bag.jpg');
 new CatalogItem ('Banana Slicer', 'img/banana.jpg');
 new CatalogItem ('iPad TP Stand', 'img/bathroom.jpg');
@@ -48,6 +47,7 @@ new CatalogItem ('Tentacle USB', 'img/usb.jpg');
 new CatalogItem ('Watering Can', 'img/water-can.jpg');
 new CatalogItem ('Wine Glass', 'img/wine-glass.jpg');
 
+//Three Random Math Variables for Accessing Array
 var randomIndex1 = Math.floor(Math.random() * catalogArray.length);
 var randomIndex2 = Math.floor(Math.random() * catalogArray.length);
 var randomIndex3 = Math.floor(Math.random() * catalogArray.length);
@@ -56,8 +56,8 @@ var randomIndex3 = Math.floor(Math.random() * catalogArray.length);
 function surveyEnd() {
   var viewResultsButton = document.createElement('button');
   viewResultsButton.textContent = 'View Results';
-  userClick.appendChild(viewResultsButton);
-  userClick.removeEventListener('click', handleUserClick);
+  picSection.appendChild(viewResultsButton);
+  picSection.removeEventListener('click', handleUserClick);
 }
 
 //Function to Load Images to Page
@@ -97,7 +97,6 @@ function loadImages() {
 
 function handleUserClick(event) {
   event.preventDefault();
-  // alert('Click is working');
 
   if (event.target.id === 'left') {
     catalogArray[randomIndex1].tallyClicked += 1;
@@ -122,4 +121,4 @@ function handleUserClick(event) {
 
 loadImages();
 
-userClick.addEventListener('click', handleUserClick);
+picSection.addEventListener('click', handleUserClick);
