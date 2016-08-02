@@ -49,10 +49,6 @@ var randomIndex3 = Math.floor(Math.random() * catalogArray.length);
 
 function loadImages() {
 
-  var randomIndex1 = Math.floor(Math.random() * catalogArray.length);
-  var randomIndex2 = Math.floor(Math.random() * catalogArray.length);
-  var randomIndex3 = Math.floor(Math.random() * catalogArray.length);
-
   while (randomIndex2 === randomIndex1) {
     randomIndex2 = Math.floor(Math.random() * catalogArray.length);
   }
@@ -68,12 +64,16 @@ function loadImages() {
   rightImg.src = catalogArray[randomIndex3].filePath;
   catalogArray[randomIndex3].tallyDisplayed += 1;
 
+  randomIndex1 = Math.floor(Math.random() * catalogArray.length);
+  randomIndex2 = Math.floor(Math.random() * catalogArray.length);
+  randomIndex3 = Math.floor(Math.random() * catalogArray.length);
 }
 
 function handleUserClick(event) {
   event.preventDefault();
 
-  alert('Click is working');
+  loadImages();
+  // alert('Click is working');
 
   if (event.target.id === 'left') {
     catalogArray[randomIndex1].tallyClicked += 1;
@@ -89,9 +89,9 @@ function handleUserClick(event) {
   else {
     alert('Pick a product!');
   }
+  console.log('I clicked' + event.target.id);
 
   // console.log(clickedObject)
-  loadImages();
 }
 
 loadImages();
