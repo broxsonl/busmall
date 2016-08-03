@@ -14,18 +14,7 @@ var surveyLength = 0;
 var imageNameArray = [];
 var tallyClickFinal = [];
 
-function checkForData() {
-  if (localStorage.userResults) {
-    catalogArray = JSON.parse(localStorage.userResults);
-  }
 
-  else {
-    catalogArray = [];
-    createCatalogItems();
-  }
-}
-
-checkForData();
 //Variables to store from randomIndexGenerator
 
 // ++++++++++++++++++++++++++++++++++++++++++++
@@ -54,6 +43,10 @@ function CatalogItem (imageName, filePath) {
   imageNameArray.push(this.imageName);
 };
 
+for (var i = 0; i < catalogArray.length; i++) {
+  imageNameArray.push(catalogArray[i].name);
+}
+
 function createCatalogItems () {
   new CatalogItem ('R2D2 Bag', 'img/bag.jpg');
   new CatalogItem ('Banana Slicer', 'img/banana.jpg');
@@ -75,6 +68,7 @@ function createCatalogItems () {
   new CatalogItem ('Tentacle USB', 'img/usb.jpg');
   new CatalogItem ('Watering Can', 'img/water-can.jpg');
   new CatalogItem ('Wine Glass', 'img/wine-glass.jpg');
+  new CatalogItem ('Willenium Album', 'img/willenium.jpg');
 };
 
 // ++++++++++++++++++++++++++++++++++++++++++++
@@ -82,6 +76,20 @@ function createCatalogItems () {
 // ++++++++++++++++++++++++++++++++++++++++++++
 
 //Function to randomly generate randomIndex1, randomIndex2, and randomIndex3
+function checkForData() {
+  if (localStorage.userResults) {
+    catalogArray = JSON.parse(localStorage.userResults);
+    for (var i = 0; i < catalogArray.length; i++) {
+      imageNameArray.push(catalogArray[i].imageName);
+    }
+  }
+
+  else {
+    catalogArray = [];
+    createCatalogItems();
+  }
+};
+
 function randomIndexGenerator() {
   randomIndex1 = Math.floor(Math.random() * catalogArray.length);
   randomIndex2 = Math.floor(Math.random() * catalogArray.length);
@@ -200,6 +208,7 @@ function drawChart() {
 // FUNCTION CALLS ON PAGE LOAD
 // ++++++++++++++++++++++++++++++++++++++++++++
 
+checkForData();
 randomIndexGenerator();
 loadImages();
 
