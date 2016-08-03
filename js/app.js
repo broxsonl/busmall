@@ -75,6 +75,7 @@ function createCatalogItems () {
   new CatalogItem ('Tentacle USB', 'img/usb.jpg');
   new CatalogItem ('Watering Can', 'img/water-can.jpg');
   new CatalogItem ('Wine Glass', 'img/wine-glass.jpg');
+  new CatalogItem ('Willenium Album', 'img/willenium.jpg');
 };
 
 // ++++++++++++++++++++++++++++++++++++++++++++
