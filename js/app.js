@@ -3,6 +3,11 @@
 // DATA - Variable declarations
 // ++++++++++++++++++++++++++++++++++++++++++++
 
+//Variables to store from randomIndexGenerator
+var randomIndex1;
+var randomIndex2;
+var randomIndex3;
+
 var catalogArray = [];
 var lastIndex = [];
 var clicksPerObjectArray = [];
@@ -11,7 +16,18 @@ var surveyLength = 0;
 var imageNameArray = [];
 var tallyClickFinal = [];
 
-//HTML Element Getters
+// ++++++++++++++++++++++++++++++++++++++++++++
+// HTML Element Getters
+// ++++++++++++++++++++++++++++++++++++++++++++
+var picSection = document.getElementById('picSection');
+var leftImg = document.getElementById('left');
+var centerImg = document.getElementById('center');
+var rightImg = document.getElementById('right');
+//View Results Button
+var viewResultsButton = document.createElement('button');
+
+//HTML Canvas Element Getter
+var canvas = document.getElementById('user-data');
 
 // ++++++++++++++++++++++++++++++++++++++++++++
 // DATA - Constructor and Instances
@@ -52,6 +68,13 @@ new CatalogItem ('Wine Glass', 'img/wine-glass.jpg');
 // FUNCTION DECLARATIONS
 // ++++++++++++++++++++++++++++++++++++++++++++
 
+//Function to randomly generate randomIndex1, randomIndex2, and randomIndex3
+function randomIndexGenerator() {
+  randomIndex1 = Math.floor(Math.random() * catalogArray.length);
+  randomIndex2 = Math.floor(Math.random() * catalogArray.length);
+  randomIndex3 = Math.floor(Math.random() * catalogArray.length);
+};
+
 //Function to end survey at 25 clicks
 function surveyEnd() {
   viewResultsButton.textContent = 'View Results';
@@ -75,15 +98,11 @@ function loadImages() {
   lastIndex.push(randomIndex3);
 
   //Re-assigning the variables for each picture
-  randomIndex1 = Math.floor(Math.random() * catalogArray.length);
-  randomIndex2 = Math.floor(Math.random() * catalogArray.length);
-  randomIndex3 = Math.floor(Math.random() * catalogArray.length);
+  randomIndexGenerator();
 
   //While loop to prevent double choices AND no prior choice repeats
   while (randomIndex1 === lastIndex[0] || randomIndex1 === lastIndex[1] || randomIndex1 === lastIndex[2] || randomIndex2 === lastIndex[0] || randomIndex2 === lastIndex[1] || randomIndex2 === lastIndex[2] || randomIndex3 === lastIndex[0] || randomIndex3 === lastIndex[1] || randomIndex3 === lastIndex[2] || randomIndex1 === randomIndex2 || randomIndex1 === randomIndex3 || randomIndex2 === randomIndex3) {
-    randomIndex1 = Math.floor(Math.random() * catalogArray.length);
-    randomIndex2 = Math.floor(Math.random() * catalogArray.length);
-    randomIndex3 = Math.floor(Math.random() * catalogArray.length);
+    randomIndexGenerator();
   }
   //Makes leftImg's src property equal to the fileName of the indexed item
   leftImg.src = catalogArray[randomIndex1].filePath;
@@ -153,6 +172,8 @@ var data = {
     },
   ]
 };
+
+//Function to Draw Chart
 function drawChart() {
   var ctx = canvas.getContext('2d');
   var myBarChart = new Chart(ctx, {
@@ -161,33 +182,18 @@ function drawChart() {
   });
 }
 
+// ++++++++++++++++++++++++++++++++++++++++++++
+// FUNCTION CALLS ON PAGE LOAD
+// ++++++++++++++++++++++++++++++++++++++++++++
 
-var picSection = document.getElementById('picSection');
-//View Results Button
-var viewResultsButton = document.createElement('button');
-
-//HTML Element Getters
-var leftImg = document.getElementById('left');
-var centerImg = document.getElementById('center');
-var rightImg = document.getElementById('right');
-
-//HTML Canvas Element Getter
-var canvas = document.getElementById('user-data');
-//Constructor for CatalogItem
-
-
-// Chart constructor
-
-//Three Random Math Variables for Accessing Array
-var randomIndex1 = Math.floor(Math.random() * catalogArray.length);
-var randomIndex2 = Math.floor(Math.random() * catalogArray.length);
-var randomIndex3 = Math.floor(Math.random() * catalogArray.length);
-
-//Function to end survey at 25 choices
-
-//Calling function at end of page to ensure initial images are loaded
+randomIndexGenerator();
 loadImages();
 
-//Event Listener
+// ++++++++++++++++++++++++++++++++++++++++++++
+// EVENT LISTENERS
+// ++++++++++++++++++++++++++++++++++++++++++++
+
+//Listener for click-on-pic
 picSection.addEventListener('click', handleUserClick);
+//Listener for click on 'View Results'
 viewResultsButton.addEventListener('click', drawChart);
