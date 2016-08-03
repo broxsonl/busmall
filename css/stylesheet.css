@@ -2,10 +2,28 @@ img {
   height: 300px;
 }
 
+#picSection {
+  float: left;
+}
+
 .clearfix {
   clear: both;
 }
 
 #user-data {
   border: dotted orange 1px;
+  max-width: 400px;
+  max-height: 400px;
+}
+
+#left {
+  float: left;
+}
+
+#center {
+  float: left;
+}
+
+#right {
+  float: left;
 }
