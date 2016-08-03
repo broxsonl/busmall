@@ -1,6 +1,12 @@
 .page-wrap {
   width: 1000px;
-  margin: auto;
+  margin: 30px auto;
+}
+
+.page-wrap h1 {
+  text-align: center;
+  font-family: 'Bangers', impact;
+  font-size: 35px;
 }
 
 img {
