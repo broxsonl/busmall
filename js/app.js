@@ -2,19 +2,31 @@
 // ++++++++++++++++++++++++++++++++++++++++++++
 // DATA - Variable declarations
 // ++++++++++++++++++++++++++++++++++++++++++++
-
-//Variables to store from randomIndexGenerator
+var catalogArray = [];
 var randomIndex1;
 var randomIndex2;
 var randomIndex3;
 
-var catalogArray = [];
 var lastIndex = [];
 var clicksPerObjectArray = [];
 var surveyLength = 0;
 //Arrays to hold data for the chartItem
 var imageNameArray = [];
 var tallyClickFinal = [];
+
+function checkForData() {
+  if (localStorage.userResults) {
+    catalogArray = JSON.parse(localStorage.userResults);
+  }
+
+  else {
+    catalogArray = [];
+    createCatalogItems();
+  }
+}
+
+checkForData();
+//Variables to store from randomIndexGenerator
 
 // ++++++++++++++++++++++++++++++++++++++++++++
 // HTML Element Getters
@@ -32,7 +44,6 @@ var canvas = document.getElementById('user-data');
 // ++++++++++++++++++++++++++++++++++++++++++++
 // DATA - Constructor and Instances
 // ++++++++++++++++++++++++++++++++++++++++++++
-
 function CatalogItem (imageName, filePath) {
   this.imageName = imageName;
   this.filePath = filePath;
@@ -43,26 +54,28 @@ function CatalogItem (imageName, filePath) {
   imageNameArray.push(this.imageName);
 };
 
-new CatalogItem ('R2D2 Bag', 'img/bag.jpg');
-new CatalogItem ('Banana Slicer', 'img/banana.jpg');
-new CatalogItem ('iPad TP Stand', 'img/bathroom.jpg');
-new CatalogItem ('Open-toed Boots', 'img/boots.jpg');
-new CatalogItem ('All-in-One Breaky', 'img/breakfast.jpg');
-new CatalogItem ('Meatball Gum', 'img/bubblegum.jpg');
-new CatalogItem ('Chair', 'img/chair.jpg');
-new CatalogItem ('Cthulhu', 'img/cthulhu.jpg');
-new CatalogItem ('Dog Duck Bill', 'img/dog-duck.jpg');
-new CatalogItem ('Dragon Meat', 'img/dragon.jpg');
-new CatalogItem ('Utensil Pen', 'img/pen.jpg');
-new CatalogItem ('Pet Sweeper', 'img/pet-sweep.jpg');
-new CatalogItem ('Pizza Scissors', 'img/scissors.jpg');
-new CatalogItem ('Shark Sleeper', 'img/shark.jpg');
-new CatalogItem ('Baby Sweeper', 'img/sweep.jpg');
-new CatalogItem ('Tauntaun Sleeper', 'img/tauntaun.jpg');
-new CatalogItem ('Unicorn Meat', 'img/unicorn.jpg');
-new CatalogItem ('Tentacle USB', 'img/usb.jpg');
-new CatalogItem ('Watering Can', 'img/water-can.jpg');
-new CatalogItem ('Wine Glass', 'img/wine-glass.jpg');
+function createCatalogItems () {
+  new CatalogItem ('R2D2 Bag', 'img/bag.jpg');
+  new CatalogItem ('Banana Slicer', 'img/banana.jpg');
+  new CatalogItem ('iPad TP Stand', 'img/bathroom.jpg');
+  new CatalogItem ('Open-toed Boots', 'img/boots.jpg');
+  new CatalogItem ('All-in-One Breaky', 'img/breakfast.jpg');
+  new CatalogItem ('Meatball Gum', 'img/bubblegum.jpg');
+  new CatalogItem ('Chair', 'img/chair.jpg');
+  new CatalogItem ('Cthulhu', 'img/cthulhu.jpg');
+  new CatalogItem ('Dog Duck Bill', 'img/dog-duck.jpg');
+  new CatalogItem ('Dragon Meat', 'img/dragon.jpg');
+  new CatalogItem ('Utensil Pen', 'img/pen.jpg');
+  new CatalogItem ('Pet Sweeper', 'img/pet-sweep.jpg');
+  new CatalogItem ('Pizza Scissors', 'img/scissors.jpg');
+  new CatalogItem ('Shark Sleeper', 'img/shark.jpg');
+  new CatalogItem ('Baby Sweeper', 'img/sweep.jpg');
+  new CatalogItem ('Tauntaun Sleeper', 'img/tauntaun.jpg');
+  new CatalogItem ('Unicorn Meat', 'img/unicorn.jpg');
+  new CatalogItem ('Tentacle USB', 'img/usb.jpg');
+  new CatalogItem ('Watering Can', 'img/water-can.jpg');
+  new CatalogItem ('Wine Glass', 'img/wine-glass.jpg');
+};
 
 // ++++++++++++++++++++++++++++++++++++++++++++
 // FUNCTION DECLARATIONS
@@ -137,6 +150,7 @@ function handleUserClick(event) {
   console.log('I clicked' + event.target.id);
 
   surveyLength += 1;
+  localStorage.setItem('userResults', JSON.stringify(catalogArray));
 
   loadImages();
 }
