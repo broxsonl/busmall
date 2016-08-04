@@ -13,8 +13,9 @@ Marketing:
   - Marketing professionals need to be able to easily view individual research participant selections
   - Marketing professionals need to be able to easily view the total participant selections of multiple users
   - Marketing professionals need to have easy access to the stored data without needing to go through the survey themselves (thus diluting the data)
+  - Marketing professionals also need to see the total # of times a product shows up so that they can compare the # of times it was clicked against the total number of times displayed
 
 Research Participant
-  - Research participants need a clear understanding of the task in front of them
+  - Research participants need a clear understanding of the task in front of them in the form of instructions on the page.
   - Research participants need to have clean, working code that creates as little confusion as possible for their volunteer efforts
   - Research participants need to have a reasonably appealing survey interface to interact with--people like attractive and simple websites
