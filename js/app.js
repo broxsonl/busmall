@@ -13,7 +13,7 @@ var surveyLength = 0;
 //Arrays to hold data for the chartItem
 var imageNameArray = [];
 var tallyClickFinal = [];
-
+var tallyViewFinal = [];
 
 //Variables to store from randomIndexGenerator
 
@@ -103,6 +103,7 @@ function surveyEnd() {
   picSection.removeEventListener('click', handleUserClick);
   for (var i = 0; i < catalogArray.length; i++) {
     tallyClickFinal.push(catalogArray[i].tallyClicked);
+    tallyViewFinal.push(catalogArray[i].tallyDisplayed);
   };
 };
 
@@ -154,6 +155,7 @@ function handleUserClick(event) {
   }
   else {
     alert('Pick a product!');
+    return;
   }
   console.log('I clicked' + event.target.id);
 
@@ -172,25 +174,106 @@ var data = {
   labels: imageNameArray,
   datasets: [
     {
-      label: 'Product Chosen',
+      label: 'Times Clicked',
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(255, 99, 132, 0.2)'
       ],
       borderColor: [
         'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)',
+        'rgba(255,99,132,1)'
       ],
       borderWidth: 1,
       data: tallyClickFinal,
+    },
+    {
+      label: 'Times Displayed',
+      backgroundColor: [
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(54, 162, 235, 0.2)'
+      ],
+      borderColor: [
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(54, 162, 235, 1)'
+      ],
+      borderWidth: 1,
+      data: tallyViewFinal,
     },
   ]
 };
@@ -201,6 +284,9 @@ function drawChart() {
   var myBarChart = new Chart(ctx, {
     type: 'bar',
     data: data,
+    // options: {
+    //   responsive: false
+    // }
   });
 }
 
